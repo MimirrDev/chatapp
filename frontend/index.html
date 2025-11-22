@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="">
+</head>
+<body>
+  <input type="text" id="room" placeholder="Oda adı">
+  <button id="joinBtn">Odaya Katıl</button>
+
+  <input type="text" id="msg" placeholder="Mesaj">
+  <button id="sendBtn">Gönder</button>
+
+  <div id="chat"></div>
+
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <script>
+    const socket = io("http://localhost:3000");
+
+    const roomInput = document.getElementById("room");
+    const msgInput = document.getElementById("msg");
+    const chatDiv = document.getElementById("chat");
+
+    document.getElementById("joinBtn").addEventListener("click", () => {
+      const room = roomInput.value.trim();
+      if (!room) return alert("Oda adı girin!");
+      socket.emit("join_room", room);
+      chatDiv.innerHTML += `<p>Katıldınız: ${room}</p>`;
+    });
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+      const room = roomInput.value.trim();
+      const message = msgInput.value.trim();
+      if (!room || !message) return alert("Oda ve mesaj gerekli!");
+      const data = { room, user: "Mustafa", message };
+      socket.emit("send_message", data);
+      msgInput.value = "";
+    });
+
+    socket.on("receive_message", (data) => {
+      chatDiv.innerHTML += `<p><b>${data.user}:</b> ${data.message}</p>`;
+    });
+  </script>
+</body>
+</html>

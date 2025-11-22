@@ -1,0 +1,39 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "Bir chat aplikasyonu.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MimirrDev/chatapp.git"
+  },
+  "keywords": [
+    "chat",
+    "discord-like",
+    "channels",
+    "guilds",
+    "messaging-app",
+    "realtime-chat",
+    "websocket-server",
+    "voice-ready",
+    "nodejs-backend"
+  ],
+  "author": "MimirrDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MimirrDev/chatapp/issues"
+  },
+  "homepage": "https://github.com/MimirrDev/chatapp#readme",
+  "devDependencies": {
+    "vitest": "^4.0.13"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}
